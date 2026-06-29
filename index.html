@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rakib Hasan · Software Engineer & Researcher</title>
+  <meta name="description" content="Rakib Hasan is a Senior Software Engineer with 3+ years at Samsung R&D Bangladesh, specializing in C#, .NET, and Windows platform development. Aspiring PhD researcher." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@300;400;500;600&family=Sora:wght@600;700&display=swap" rel="stylesheet" />
+  <style>
+    /* ── TOKENS ── */
+    :root {
+      --bg:        #F7F6F2;
+      --bg-card:   #FFFFFF;
+      --ink:       #1A1A1A;
+      --ink-muted: #6B6B6B;
+      --accent:    #0A5C9B;
+      --accent-2:  #E8F0F9;
+      --rule:      #E0DDD6;
+      --mono:      'IBM Plex Mono', monospace;
+      --sans:      'Inter', sans-serif;
+      --display:   'Sora', sans-serif;
+      --radius:    6px;
+      --max:       860px;
+      --nav-h:     56px;
+    }
+    [data-theme="dark"] {
+      --bg:        #0F0F0F;
+      --bg-card:   #1A1A1A;
+      --ink:       #EDEDED;
+      --ink-muted: #888888;
+      --accent:    #5BA3D9;
+      --accent-2:  #0F1F2E;
+      --rule:      #2A2A2A;
+    }
+
+    /* ── RESET ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--sans);
+      font-weight: 400;
+      line-height: 1.7;
+      transition: background 0.25s, color 0.25s;
+    }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    img { display: block; max-width: 100%; }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      height: var(--nav-h);
+      background: var(--bg);
+      border-bottom: 1px solid var(--rule);
+      display: flex; align-items: center;
+      padding: 0 24px;
+      transition: background 0.25s;
+    }
+    .nav-inner {
+      max-width: var(--max);
+      margin: 0 auto; width: 100%;
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 16px;
+    }
+    .nav-name {
+      font-family: var(--mono);
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--ink);
+      white-space: nowrap;
+    }
+    .nav-links {
+      display: flex; align-items: center; gap: 20px;
+      list-style: none;
+      flex-wrap: wrap;
+    }
+    .nav-links a {
+      font-size: 0.8rem;
+      color: var(--ink-muted);
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--accent); text-decoration: none; }
+    #theme-btn {
+      background: none; border: 1px solid var(--rule);
+      border-radius: 50%; width: 32px; height: 32px;
+      cursor: pointer; font-size: 1rem;
+      color: var(--ink); flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      transition: border-color 0.2s;
+    }
+    #theme-btn:hover { border-color: var(--accent); }
+
+    /* ── LAYOUT ── */
+    .page { padding-top: var(--nav-h); }
+    .container { max-width: var(--max); margin: 0 auto; padding: 0 24px; }
+    section { padding: 72px 0; border-bottom: 1px solid var(--rule); }
+    section:last-of-type { border-bottom: none; }
+
+    /* ── HERO ── */
+    #hero {
+      padding: 80px 0 72px;
+      border-bottom: 1px solid var(--rule);
+    }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr 160px;
+      gap: 48px;
+      align-items: start;
+    }
+    .hero-eyebrow {
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      color: var(--accent);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    .hero-name {
+      font-family: var(--display);
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 700;
+      line-height: 1.1;
+      color: var(--ink);
+      margin-bottom: 16px;
+    }
+    .hero-tagline {
+      font-size: 1.05rem;
+      color: var(--ink-muted);
+      margin-bottom: 24px;
+      max-width: 520px;
+    }
+    .hero-meta {
+      display: flex; flex-wrap: wrap; gap: 16px;
+      margin-bottom: 28px;
+    }
+    .hero-meta span {
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      color: var(--ink-muted);
+    }
+    .hero-links {
+      display: flex; flex-wrap: wrap; gap: 10px;
+    }
+    .btn {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 8px 16px;
+      border-radius: var(--radius);
+      font-size: 0.82rem;
+      font-weight: 500;
+      border: 1px solid var(--rule);
+      color: var(--ink);
+      background: var(--bg-card);
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .btn:hover { border-color: var(--accent); color: var(--accent); text-decoration: none; }
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+      border-color: var(--accent);
+    }
+    .btn-primary:hover { background: var(--accent); opacity: 0.88; color: #fff; }
+
+    .avatar-wrap {
+      width: 160px; height: 160px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 3px solid var(--rule);
+      background: var(--accent-2);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .avatar-placeholder {
+      font-family: var(--display);
+      font-size: 3rem;
+      font-weight: 700;
+      color: var(--accent);
+      user-select: none;
+    }
+
+    /* ── SECTION HEADERS ── */
+    .section-label {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+    h2 {
+      font-family: var(--display);
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 28px;
+    }
+
+    /* ── NEWS ── */
+    .news-list { display: flex; flex-direction: column; gap: 0; }
+    .news-item {
+      display: grid;
+      grid-template-columns: 100px 1fr;
+      gap: 16px;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--rule);
+    }
+    .news-item:last-child { border-bottom: none; }
+    .news-date {
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      color: var(--ink-muted);
+      padding-top: 2px;
+    }
+    .news-text { font-size: 0.92rem; color: var(--ink); }
+    .tag {
+      display: inline-block;
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      padding: 2px 7px;
+      border-radius: 3px;
+      background: var(--accent-2);
+      color: var(--accent);
+      margin-right: 6px;
+      vertical-align: middle;
+    }
+
+    /* ── EXPERIENCE ── */
+    .exp-item { margin-bottom: 40px; }
+    .exp-item:last-child { margin-bottom: 0; }
+    .exp-header {
+      display: flex; justify-content: space-between; align-items: baseline;
+      flex-wrap: wrap; gap: 8px;
+      margin-bottom: 4px;
+    }
+    .exp-title {
+      font-family: var(--display);
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--ink);
+    }
+    .exp-date {
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      color: var(--ink-muted);
+      white-space: nowrap;
+    }
+    .exp-company {
+      font-size: 0.88rem;
+      color: var(--accent);
+      margin-bottom: 12px;
+    }
+    .exp-bullets {
+      list-style: none;
+      display: flex; flex-direction: column; gap: 7px;
+    }
+    .exp-bullets li {
+      font-size: 0.9rem;
+      color: var(--ink);
+      padding-left: 18px;
+      position: relative;
+    }
+    .exp-bullets li::before {
+      content: '▸';
+      position: absolute; left: 0;
+      color: var(--accent);
+      font-size: 0.75rem;
+      top: 3px;
+    }
+    .tech-stack {
+      margin-top: 12px;
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      color: var(--ink-muted);
+    }
+    .tech-stack span {
+      display: inline-block;
+      padding: 2px 8px;
+      border: 1px solid var(--rule);
+      border-radius: 3px;
+      margin: 3px 3px 0 0;
+      color: var(--ink-muted);
+    }
+
+    /* ── PUBLICATIONS ── */
+    .pub-filters {
+      display: flex; gap: 8px; margin-bottom: 24px;
+    }
+    .pub-filter-btn {
+      padding: 5px 14px;
+      border-radius: 20px;
+      border: 1px solid var(--rule);
+      background: none;
+      font-size: 0.8rem;
+      font-family: var(--sans);
+      color: var(--ink-muted);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .pub-filter-btn.active, .pub-filter-btn:hover {
+      background: var(--accent);
+      color: #fff;
+      border-color: var(--accent);
+    }
+    .pub-group { margin-bottom: 32px; }
+    .pub-group-title {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--ink-muted);
+      border-bottom: 1px solid var(--rule);
+      padding-bottom: 6px;
+      margin-bottom: 16px;
+    }
+    .pub-item {
+      padding: 16px 0;
+      border-bottom: 1px solid var(--rule);
+    }
+    .pub-item:last-child { border-bottom: none; }
+    .pub-title {
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: var(--ink);
+      margin-bottom: 4px;
+    }
+    .pub-authors {
+      font-size: 0.83rem;
+      color: var(--ink-muted);
+      margin-bottom: 4px;
+    }
+    .pub-authors strong { color: var(--ink); }
+    .pub-venue {
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      color: var(--accent);
+    }
+
+    /* ── SKILLS ── */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 16px;
+    }
+    .skill-card {
+      background: var(--bg-card);
+      border: 1px solid var(--rule);
+      border-radius: var(--radius);
+      padding: 16px;
+    }
+    .skill-card-title {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      color: var(--accent);
+      margin-bottom: 10px;
+    }
+    .skill-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+    .skill-tag {
+      font-size: 0.8rem;
+      padding: 3px 9px;
+      background: var(--accent-2);
+      border-radius: 3px;
+      color: var(--ink);
+    }
+
+    /* ── EDUCATION ── */
+    .edu-item { display: grid; grid-template-columns: 90px 1fr; gap: 16px; padding: 16px 0; border-bottom: 1px solid var(--rule); }
+    .edu-item:last-child { border-bottom: none; }
+    .edu-year { font-family: var(--mono); font-size: 0.75rem; color: var(--ink-muted); padding-top: 3px; }
+    .edu-degree { font-weight: 500; font-size: 0.95rem; margin-bottom: 2px; }
+    .edu-school { font-size: 0.88rem; color: var(--accent); margin-bottom: 2px; }
+    .edu-detail { font-size: 0.82rem; color: var(--ink-muted); font-family: var(--mono); }
+
+    /* ── HONORS ── */
+    .honor-list { display: flex; flex-direction: column; gap: 0; }
+    .honor-item {
+      display: grid;
+      grid-template-columns: 70px 1fr;
+      gap: 16px;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--rule);
+      font-size: 0.9rem;
+    }
+    .honor-item:last-child { border-bottom: none; }
+    .honor-year { font-family: var(--mono); font-size: 0.75rem; color: var(--ink-muted); padding-top: 2px; }
+
+    /* ── CONTACT ── */
+    .contact-block {
+      display: flex; flex-direction: column; gap: 12px;
+      max-width: 520px;
+    }
+    .contact-block p { font-size: 0.95rem; color: var(--ink-muted); }
+    .contact-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 8px; }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 32px 0;
+      text-align: center;
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      color: var(--ink-muted);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 640px) {
+      .hero-grid { grid-template-columns: 1fr; }
+      .avatar-wrap { width: 100px; height: 100px; order: -1; }
+      .avatar-placeholder { font-size: 2rem; }
+      .nav-links { display: none; }
+      .news-item { grid-template-columns: 80px 1fr; }
+      .edu-item { grid-template-columns: 70px 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <span class="nav-name">rakib hasan</span>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#news">News</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#publications">Publications</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#education">Education</a></li>
+      <li><a href="#honors">Honors</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <button id="theme-btn" aria-label="Toggle dark mode">◐</button>
+  </div>
+</nav>
+
+<div class="page">
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="container">
+      <div class="hero-grid">
+        <div>
+          <p class="hero-eyebrow">Software Engineer &amp; Researcher</p>
+          <h1 class="hero-name">Rakib Hasan</h1>
+          <p class="hero-tagline">
+            Building Windows platform software at scale — and asking research questions about what comes next. 3+ years shipping features used by millions at Samsung R&amp;D. Aspiring PhD researcher.
+          </p>
+          <div class="hero-meta">
+            <span>📍 Dhaka, Bangladesh</span>
+            <span>✉ rakibhasan1107@gmail.com</span>
+            <span>📞 (+880) 1628-546970</span>
+          </div>
+          <div class="hero-links">
+            <a class="btn btn-primary" href="mailto:rakibhasan1107@gmail.com">Email Me</a>
+            <a class="btn" href="https://www.linkedin.com/in/rakib-hasan-797b07228/" target="_blank">LinkedIn ↗</a>
+            <a class="btn" href="https://github.com/blueshark-14" target="_blank">GitHub ↗</a>
+            <a class="btn" href="https://scholar.google.com/citations?user=qbuy044AAAAJ&hl=en" target="_blank">Scholar ↗</a>
+          </div>
+        </div>
+        <div class="avatar-wrap">
+          <!-- Replace src with your photo path when ready -->
+          <span class="avatar-placeholder">RH</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="container">
+      <p class="section-label">Biography</p>
+      <h2>About Me</h2>
+      <p style="max-width:680px; font-size:0.97rem; color:var(--ink-muted); line-height:1.85;">
+        I am a Senior Software Engineer with over three years of experience building Windows platform features at
+        <strong style="color:var(--ink)">Samsung R&amp;D Institute Bangladesh</strong>, where I led the end-to-end
+        delivery of SmartThings Routine Creation &amp; Editing on Windows — from architecture through launch —
+        reaching millions of users. My technical focus is on real-time UI, asynchronous data pipelines, and
+        cross-platform collaboration using <strong style="color:var(--ink)">C#, .NET, WPF, WinUI 3,</strong> and
+        <strong style="color:var(--ink)">MVVM</strong>.
+      </p>
+      <br />
+      <p style="max-width:680px; font-size:0.97rem; color:var(--ink-muted); line-height:1.85;">
+        Beyond industry work, I am an active researcher. I hold a B.Sc. in CSE from
+        <strong style="color:var(--ink)">Khulna University of Engineering &amp; Technology</strong>, with a thesis
+        on fuzzy inference systems for chemical risk evaluation. I have one peer-reviewed journal article and one
+        conference paper, with a patent contribution filed during my time at Samsung. I am currently
+        <strong style="color:var(--ink)">seeking PhD opportunities</strong> in the USA and UK to pursue research
+        at the intersection of software systems, AI, and human-computer interaction.
+      </p>
+    </div>
+  </section>
+
+  <!-- NEWS -->
+  <section id="news">
+    <div class="container">
+      <p class="section-label">Updates</p>
+      <h2>News</h2>
+      <div class="news-list">
+        <div class="news-item">
+          <span class="news-date">2026.06</span>
+          <span class="news-text"><span class="tag">Award</span> Received the <strong>Icon Award (Jan–Feb 2026)</strong> at Samsung R&amp;D Institute Bangladesh.</span>
+        </div>
+        <div class="news-item">
+          <span class="news-date">2026.06</span>
+          <span class="news-text"><span class="tag">Career</span> Actively seeking Senior .NET Developer roles and PhD positions in the USA &amp; UK.</span>
+        </div>
+        <div class="news-item">
+          <span class="news-date">2025.03</span>
+          <span class="news-text"><span class="tag">Promoted</span> Promoted to <strong>Senior Software Engineer</strong> at Samsung R&amp;D Institute Bangladesh.</span>
+        </div>
+        <div class="news-item">
+          <span class="news-date">2024.00</span>
+          <span class="news-text"><span class="tag">Award</span> Received the <strong>Excellence Award for Outstanding Contribution</strong> — Samsung.</span>
+        </div>
+        <div class="news-item">
+          <span class="news-date">2024.00</span>
+          <span class="news-text"><span class="tag">Paper</span> Conference paper on <em>Risk Evaluation of Explosive and Flammable Chemicals Using Fuzzy Inference System</em> published.</span>
+        </div>
+        <div class="news-item">
+          <span class="news-date">2023.03</span>
+          <span class="news-text"><span class="tag">Joined</span> Joined <strong>Samsung R&amp;D Institute Bangladesh</strong> as Software Engineer.</span>
+        </div>
+        <div class="news-item">
+          <span class="news-date">2023.00</span>
+          <span class="news-text"><span class="tag">Award</span> Received <strong>Excellence in SW Certificate Test</strong> — Samsung.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section id="experience">
+    <div class="container">
+      <p class="section-label">Work</p>
+      <h2>Experience</h2>
+
+      <div class="exp-item">
+        <div class="exp-header">
+          <span class="exp-title">Senior Software Engineer</span>
+          <span class="exp-date">Mar 2025 – Jun 2026</span>
+        </div>
+        <div class="exp-company">Samsung R&amp;D Institute Bangladesh · Dhaka, Bangladesh</div>
+        <ul class="exp-bullets">
+          <li>Led end-to-end delivery of <strong>SmartThings Routine Creation &amp; Editing on Windows</strong> — designed architecture, built from scratch, aligned with Android counterpart, and shipped on time; recognized by leadership.</li>
+          <li>Built responsive, real-time UI using <strong>SSE, async/await, ObservableCollection,</strong> and <strong>MVVM</strong> — enabling users to automate lights, thermostats, music, and other smart home devices.</li>
+          <li>Resolved production-critical crashes and performance regressions under tight release cycles in collaboration with global QA and Android teams.</li>
+          <li>Drove AI-PoC, patent, and MDC innovation initiatives — contributing ideas that advanced platform capabilities.</li>
+          <li>Mentored junior engineers on code quality, architecture decisions, and CI/CD practices.</li>
+        </ul>
+        <div class="tech-stack">
+          <span>C#</span><span>.NET (UWP)</span><span>SSE</span><span>async/await</span><span>MVVM</span><span>Git</span>
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-header">
+          <span class="exp-title">Software Engineer</span>
+          <span class="exp-date">Mar 2023 – Feb 2025</span>
+        </div>
+        <div class="exp-company">Samsung R&amp;D Institute Bangladesh · Dhaka, Bangladesh</div>
+        <ul class="exp-bullets">
+          <li>Built live camera streaming in <strong>SmartThings AVPlayer</strong> using GStreamer and WebRTC, integrated with WPF via WindowsFormsHost with smooth playback optimization.</li>
+          <li>Contributed to <strong>Samsung DeX Windows</strong> features including file transfer, localization, and C++ integration.</li>
+          <li>Developed and evaluated demo apps for Nearby Device project using .NET UWP, WPF, and WinUI 3 to inform technology stack decisions.</li>
+          <li>Submitted smart home innovation PoCs and participated in patent ideation process.</li>
+        </ul>
+        <div class="tech-stack">
+          <span>C#</span><span>WPF</span><span>UWP</span><span>WinUI 3</span><span>C++</span><span>GStreamer</span><span>WebRTC</span><span>SmartThings SDK</span><span>Samsung DeX SDK</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PUBLICATIONS -->
+  <section id="publications">
+    <div class="container">
+      <p class="section-label">Research</p>
+      <h2>Publications</h2>
+
+      <div class="pub-filters">
+        <button class="pub-filter-btn active" onclick="filterPubs('all', this)">All</button>
+        <button class="pub-filter-btn" onclick="filterPubs('journal', this)">Journal</button>
+        <button class="pub-filter-btn" onclick="filterPubs('conference', this)">Conference</button>
+      </div>
+
+      <div class="pub-group" id="group-journal" data-type="journal">
+        <div class="pub-group-title">Journal Articles</div>
+        <div class="pub-item">
+          <div class="pub-title">[Your journal article title — please update]</div>
+          <div class="pub-authors"><strong>Rakib Hasan</strong> et al.</div>
+          <div class="pub-venue">Journal Name · Year · <a href="#">Link ↗</a></div>
+        </div>
+      </div>
+
+      <div class="pub-group" id="group-conference" data-type="conference">
+        <div class="pub-group-title">Conference Papers</div>
+        <div class="pub-item">
+          <div class="pub-title">Risk Evaluation of Explosive and Flammable Chemicals Using Fuzzy Inference System</div>
+          <div class="pub-authors">Md. Masum Suzon, <strong>Rakib Hasan</strong>, Abdul Aziz, Abu Zafar Md. Nuruzzaman Abir</div>
+          <div class="pub-venue">Conference Paper · Mar 2024</div>
+        </div>
+      </div>
+
+      <p style="margin-top:12px; font-family:var(--mono); font-size:0.78rem; color:var(--ink-muted);">
+        Also: 1 patent contribution filed at Samsung R&amp;D Institute Bangladesh.
+        <a href="https://scholar.google.com/citations?user=qbuy044AAAAJ&hl=en" target="_blank">Full profile on Google Scholar ↗</a>
+      </p>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <div class="container">
+      <p class="section-label">Technical</p>
+      <h2>Skills</h2>
+      <div class="skills-grid">
+        <div class="skill-card">
+          <div class="skill-card-title">Core Stack</div>
+          <div class="skill-tags">
+            <span class="skill-tag">C#</span>
+            <span class="skill-tag">.NET</span>
+            <span class="skill-tag">WPF</span>
+            <span class="skill-tag">UWP</span>
+            <span class="skill-tag">WinUI 3</span>
+            <span class="skill-tag">MVVM</span>
+            <span class="skill-tag">C++</span>
+          </div>
+        </div>
+        <div class="skill-card">
+          <div class="skill-card-title">Protocols & Tools</div>
+          <div class="skill-tags">
+            <span class="skill-tag">SSE</span>
+            <span class="skill-tag">WebRTC</span>
+            <span class="skill-tag">GStreamer</span>
+            <span class="skill-tag">async/await</span>
+            <span class="skill-tag">Git</span>
+            <span class="skill-tag">CI/CD</span>
+            <span class="skill-tag">Visual Studio</span>
+          </div>
+        </div>
+        <div class="skill-card">
+          <div class="skill-card-title">SDKs</div>
+          <div class="skill-tags">
+            <span class="skill-tag">SmartThings SDK</span>
+            <span class="skill-tag">Samsung DeX SDK</span>
+          </div>
+        </div>
+        <div class="skill-card">
+          <div class="skill-card-title">Other Languages</div>
+          <div class="skill-tags">
+            <span class="skill-tag">Python</span>
+            <span class="skill-tag">Kotlin</span>
+            <span class="skill-tag">Java</span>
+            <span class="skill-tag">JavaScript</span>
+            <span class="skill-tag">C</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EDUCATION -->
+  <section id="education">
+    <div class="container">
+      <p class="section-label">Academic</p>
+      <h2>Education</h2>
+      <div class="edu-item">
+        <span class="edu-year">2018 – 2023</span>
+        <div>
+          <div class="edu-degree">B.Sc. in Computer Science &amp; Engineering</div>
+          <div class="edu-school">Khulna University of Engineering &amp; Technology · Khulna, Bangladesh</div>
+          <div class="edu-detail">CGPA: 3.12 / 4.00 · Thesis: Fuzzy Inference System for Chemical Risk Evaluation</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HONORS -->
+  <section id="honors">
+    <div class="container">
+      <p class="section-label">Recognition</p>
+      <h2>Honors &amp; Awards</h2>
+      <div class="honor-list">
+        <div class="honor-item">
+          <span class="honor-year">2026</span>
+          <span>Icon Award (Jan–Feb 2026) — Samsung R&amp;D Institute Bangladesh</span>
+        </div>
+        <div class="honor-item">
+          <span class="honor-year">2024</span>
+          <span>Excellence Award for Outstanding Contribution — Samsung</span>
+        </div>
+        <div class="honor-item">
+          <span class="honor-year">2024</span>
+          <span>Patent contribution filed during tenure at Samsung R&amp;D</span>
+        </div>
+        <div class="honor-item">
+          <span class="honor-year">2024</span>
+          <span>Published: 1 peer-reviewed journal article + 1 conference paper</span>
+        </div>
+        <div class="honor-item">
+          <span class="honor-year">2023</span>
+          <span>Excellence in SW Certificate Test — Samsung</span>
+        </div>
+        <div class="honor-item">
+          <span class="honor-year">2022</span>
+          <span>1st Runner-Up — KU CSE Fest Programming Contest</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="container">
+      <p class="section-label">Get in Touch</p>
+      <h2>Contact</h2>
+      <div class="contact-block">
+        <p>I am open to Senior .NET Developer roles, collaborative research, and PhD opportunities. The best way to reach me is by email.</p>
+        <div class="contact-links">
+          <a class="btn btn-primary" href="mailto:rakibhasan1107@gmail.com">✉ rakibhasan1107@gmail.com</a>
+          <a class="btn" href="https://www.linkedin.com/in/rakib-hasan-797b07228/" target="_blank">LinkedIn ↗</a>
+          <a class="btn" href="https://github.com/blueshark-14" target="_blank">GitHub ↗</a>
+          <a class="btn" href="https://scholar.google.com/citations?user=qbuy044AAAAJ&hl=en" target="_blank">Google Scholar ↗</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<footer>
+  <div class="container">
+    Designed &amp; built by Rakib Hasan · Last updated June 2026
+  </div>
+</footer>
+
+<script>
+  // Dark / light toggle
+  const btn = document.getElementById('theme-btn');
+  const html = document.documentElement;
+  btn.addEventListener('click', () => {
+    html.setAttribute('data-theme', html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+  });
+
+  // Nav active highlight on scroll
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-links a');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        navLinks.forEach(a => a.classList.remove('active'));
+        const active = document.querySelector(`.nav-links a[href="#${e.target.id}"]`);
+        if (active) active.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-40% 0px -55% 0px' });
+  sections.forEach(s => observer.observe(s));
+
+  // Publication filter
+  function filterPubs(type, btnEl) {
+    document.querySelectorAll('.pub-filter-btn').forEach(b => b.classList.remove('active'));
+    btnEl.classList.add('active');
+    document.querySelectorAll('.pub-group').forEach(g => {
+      g.style.display = (type === 'all' || g.dataset.type === type) ? 'block' : 'none';
+    });
+  }
+</script>
+</body>
+</html>
